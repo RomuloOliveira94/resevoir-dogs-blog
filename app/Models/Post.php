@@ -48,11 +48,11 @@ class Post extends Model
     }
     public function likes()
     {
-         return $this->belongsToMany(User::class, 'post_like')->withTimestamps();
+        return $this->belongsToMany(User::class, 'post_like')->withTimestamps();
     }
     public function decks()
     {
-         return $this->belongsToMany(Deck::class,'deck_post');
+        return $this->belongsToMany(Deck::class, 'deck_post');
     }
 
     public function scopePublished($query)
@@ -61,13 +61,21 @@ class Post extends Model
     }
     public function scopeWithCategory($query, string $category)
     {
-        $query->whereHas('categories', function($query) use ($category) {
+        $query->whereHas('categories', function ($query) use ($category) {
             $query->where('slug', $category);
         });
     }
     public function scopeFeatured($query)
     {
         $query->where('featured', true);
+    }
+    public function scopePopular($query)
+    {
+        $query->withCount('likes')->orderBy('likes_count', 'desc');
+    }
+    public function scopeSearch($query, $search = '')
+    {
+        $query->where('title', 'like', "%{$search}%");
     }
 
     public function getExcerpt()
