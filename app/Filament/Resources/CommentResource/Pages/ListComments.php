@@ -16,4 +16,11 @@ class ListComments extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public function getHeaderWidgets(): array
+    {
+        return [
+            CommentResource\Widgets\LatestCommentsWidget::class,
+        ];
+    }
 }
