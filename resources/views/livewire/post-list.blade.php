@@ -9,22 +9,22 @@
             @endif
             @if ($search)
                 <span class="ml-2">
-                    Containing: <strong>{{ $search }}</strong>
+                    {{ __('blog.containing') }}: <strong>{{ $search }}</strong>
                 </span>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
             <x-label>
-                <span class="text-gray-500">Popular</span>
+                <span class="text-gray-500">{{ __('blog.popular') }}</span>
             </x-label>
             <x-checkbox wire:model.live="popular" />
             <button class="{{ $sort === 'desc' ? 'text-gray-900 py-4 border-b border-gray-700' : 'text-gray-500 py-4' }}"
                 x-data="{ sort: '{{ $sort }}' }" x-on:click="sort = 'desc'; $wire.setSort('desc')">
-                Latest
+                {{ __('blog.latest') }}
             </button>
             <button class="{{ $sort === 'asc' ? 'text-gray-900 py-4 border-b border-gray-700' : 'text-gray-500 py-4' }}"
                 x-data="{ sort: '{{ $sort }}' }" x-on:click="sort = 'asc'; $wire.setSort('asc')">
-                Oldest
+                {{ __('blog.oldest') }}
             </button>
         </div>
     </div>
